@@ -1,323 +1,136 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Deepmersion | El Equipo de Supervivencia</title>
-    <style>
-      :root {
-        --primary: #333333; 
-        --secondary: #878787; 
-        --light-bg: #fbfbfd;
-        --darker-bg: #f2f2f5; 
-        --white: #ffffff;
-        --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        --gap: 80px; 
-      }
+<style>
+  /* --- ESTILOS ESPECÍFICOS PARA ESTA SECCIÓN --- */
+  .seven-section {
+    margin-bottom: var(--gap);
+  }
 
-      body { 
-        margin: 0; padding: 0; background: var(--white); 
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; 
-        color: var(--primary); line-height: 1.7; -webkit-font-smoothing: antialiased;
-        text-align: left;
-      }
+  .seven-grid-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
 
-      .container { width: 100%; max-width: 700px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
+  .seven-line {
+    font-size: clamp(32px, 8vw, 54px);
+    font-weight: 800;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--primary);
+  }
 
-      .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease); }
-      .reveal.active { opacity: 1; transform: translateY(0); }
+  /* El 7 se mantiene estable, la palabra es la que anima */
+  .gradual-word {
+    opacity: 0;
+    transform: translateY(15px);
+    color: var(--secondary);
+    transition: all 0.8s var(--ease);
+  }
 
-      /* --- ENCABEZADO --- */
-      header { padding: 60px 0 0 0; margin-bottom: var(--gap); } 
-      .header-logo { width: 100%; max-width: 380px; height: auto; margin-bottom: 40px; display: block; border-radius: 12px; }
-      
-      .product-label { 
-        font-size: 11px; 
-        font-weight: 800; 
-        text-transform: uppercase; 
-        letter-spacing: 0.2em; 
-        color: var(--secondary); 
-        margin-bottom: 12px; 
-        display: block;
-      }
+  /* Activación escalonada cuando la sección entra en pantalla */
+  .active .gradual-word.w1 { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+  .active .gradual-word.w2 { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+  .active .gradual-word.w3 { transition-delay: 1.2s; opacity: 1; transform: translateY(0); }
 
-      h1 { 
-        font-size: clamp(28px, 6vw, 48px); 
-        font-weight: 700; 
-        letter-spacing: -0.03em; 
-        line-height: 1.1; 
-        color: var(--primary); 
-        margin: 0;
-      }
+  .seven-description {
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
 
-      h2 { font-size: 26px; font-weight: 700; margin-bottom: 25px; color: var(--secondary); line-height: 1.1; }
-      .h-highlight { color: var(--primary); }
+  /* Reutilización de Slider optimizado */
+  .days-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 10px 0 30px 0;
+    cursor: grab;
+  }
+  .days-slider::-webkit-scrollbar { display: none; }
+  
+  .day-card {
+    flex: 0 0 280px;
+    background: var(--light-bg);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid #f2f2f2;
+    scroll-snap-align: start;
+  }
+  
+  .day-tag { font-weight: 800; font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+  .day-card h4 { font-size: 18px; margin: 15px 0 10px 0; color: var(--primary); }
+  .day-card p { font-size: 14px; line-height: 1.5; margin: 0; color: var(--secondary); }
 
-      p { font-size: 18px; color: var(--secondary); font-weight: 400; margin-top: 0; margin-bottom: 24px; }
-      p strong { color: var(--primary); }
+  @media (max-width: 600px) {
+    .day-card { flex: 0 0 85%; }
+  }
+</style>
 
-      /* --- SECCIONES CON MARGEN 80PX --- */
-      section { margin-bottom: var(--gap); }
-
-      /* --- EQUIPO DE SUPERVIVENCIA --- */
-      .equipment-item { margin-bottom: 40px; padding: 35px; background: var(--light-bg); border-radius: 24px; border: 1px solid #f2f2f2; }
-      .equipment-item h3 { font-size: 20px; margin-bottom: 20px; color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 10px; }
-      
-      /* UNIFICACIÓN DE ETIQUETAS SOLICITADA */
-      .tag-label { 
-        font-size: 17px; /* Consistente con el párrafo */
-        font-weight: 700; 
-        color: var(--primary); 
-        display: inline-block;
-        margin-right: 4px;
-      }
-
-      /* --- SLIDER 7 DÍAS --- */
-      .days-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 20px 0; cursor: grab; }
-      .days-slider::-webkit-scrollbar { display: none; }
-      .day-card { flex: 0 0 280px; background: var(--light-bg); padding: 30px; border-radius: 24px; border: 1px solid #f2f2f2; scroll-snap-align: start; }
-      .day-tag { font-weight: 800; font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.1em; }
-      .day-card h4 { font-size: 18px; margin: 15px 0 10px 0; color: var(--primary); }
-      .day-card p { font-size: 14px; line-height: 1.5; margin: 0; }
-
-      /* --- AUDITORÍA --- */
-      .audit-section { background: var(--darker-bg); padding: 40px; border-radius: 28px; border: 1px solid #e8e8ed; }
-      .audit-list { list-style: none; padding: 0; margin-top: 20px; }
-      .audit-list li { margin-bottom: 12px; font-size: 16px; color: var(--secondary); padding-left: 20px; position: relative; }
-      .audit-list li::before { content: "•"; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
-
-      /* --- PACTO DE TRINCHERA (DISEÑO FOTO) --- */
-      .pact-section {
-        margin-bottom: var(--gap);
-        padding: 60px 40px;
-        background: var(--white);
-        border-radius: 32px;
-        border: 1px solid #eee;
-        text-align: center;
-      }
-      .pact-context { font-size: 16px; color: var(--secondary); margin-bottom: 35px; max-width: 90%; margin-left: auto; margin-right: auto; }
-
-      .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
-      .price-card {
-        background: var(--white);
-        padding: 30px;
-        border-radius: 20px;
-        border: 1px solid #eee;
-        display: flex; flex-direction: column; justify-content: space-between;
-      }
-      .price-card-title { font-weight: 700; color: var(--primary); font-size: 16px; margin-bottom: 15px; display: block;}
-      .price-card strong { display: block; font-size: 48px; color: var(--primary); margin: 0; font-weight: 700; line-height: 1; }
-      .price-card-label { font-size: 11px; color: var(--primary); text-transform: uppercase; font-weight: 800; margin: 15px 0; display: block; letter-spacing: 0.05em; }
-      .price-card p { font-size: 14px; color: var(--secondary); line-height: 1.5; margin: 0; }
-
-      .pact-divider { height: 1px; background: #eee; width: 80px; margin: 0 auto 30px auto; }
-      .pact-quote { font-style: italic; color: var(--secondary); font-size: 15px; max-width: 85%; margin: 0 auto; text-align: center; }
-
-      /* --- URGENCIA Y TIMER --- */
-      .urgency-section { background: var(--primary); color: var(--white); padding: 40px; border-radius: 28px; }
-      .urgency-section h2 { color: var(--white); }
-      .urgency-section p { color: #aaa; }
-      
-      #countdown { display: flex; gap: 15px; margin-top: 30px; justify-content: flex-start; }
-      .timer-block { text-align: center; }
-      .timer-val { display: block; font-size: 24px; font-weight: 700; color: #fff; }
-      .timer-label { font-size: 10px; text-transform: uppercase; color: var(--secondary); }
-
-      /* --- BOTÓN PEQUEÑO --- */
-      .btn-container { text-align: center; margin-bottom: var(--gap); }
-      .cta-button { 
-        display: inline-block; 
-        padding: 16px 36px; 
-        background: var(--primary); 
-        color: var(--white); 
-        text-decoration: none; 
-        border-radius: 14px; 
-        font-size: 16px; 
-        font-weight: 700; 
-        transition: transform 0.2s ease;
-      }
-      .cta-button:active { transform: scale(0.96); }
-
-      /* --- FOOTER --- */
-      footer { padding: 0 0 80px 0; }
-      .final-logo { width: 50px; height: auto; display: block; margin-top: 35px; }
-
-      @media (max-width: 600px) {
-        .price-grid { grid-template-columns: 1fr; }
-        .day-card { flex: 0 0 85%; }
-        .cta-button { width: 100%; box-sizing: border-box; }
-      }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-      <header class="reveal">
-        <img src="bufon.jpeg" alt="Logo" class="header-logo">
-        <span class="product-label">Deepmersion</span>
-        <h1>7 días para dejar de ser un títere en la superficie y recuperar tu densidad.</h1>
-      </header>
-
-      <section class="reveal">
-        <p>Si has llegado hasta aquí es porque el Deepfall te puso frente al espejo: has identificado tu máscara, has visto lo que hace que te rechacen sin que siquiera abras la boca y has comprendido que tu complacencia es, precisamente, lo que te hace invisible ante las mujeres que realmente te interesan.</p>
-        <p><strong>Sabes que estás en el fondo. Pero estar en el fondo no sirve de nada si no sabes cómo moverte en la oscuridad.</strong></p>
-      </section>
-
-      <section class="reveal">
-        <h2>La Deepmersion no es un curso de seducción. <span class="h-highlight">Es una inmersión táctica.</span></h2>
-        <p>Es una inmersión táctica de 7 días diseñada para dotarte del equipo de supervivencia que tu sistema nervioso necesita para dejar de ser reactivo y empezar a ser el punto de referencia de cada interacción.</p>
-        <p>La mayoría de los hombres intentan resolver sus problemas con las mujeres aprendiendo "frases" o "trucos" de YouTube, asumen que una vez sepan "qué decir" el gran dilema se resuelve, pero la realidad es que, si no se sienten "quiénes" para decirlo, da igual lo que reciten, seguirán siendo descartados. Para un hombre de mente lógica como tú, eso solo añade más carga a una mochila que ya pesa demasiado.</p>
-        <p>Tu problema no es la falta de información. Es la volatilidad. Tu estado emocional depende de ella. Tu comunicación es una entrevista de trabajo. Y tu mente colapsa porque intentas controlarlo todo para evitar el rechazo.</p>
-        <p>La Deepmersion soluciona los 3 fallos sistémicos que destrozan tu atracción en el presente y sentencian tu futuro con ellas. Solo cuando instales este equipo, el peso de tus errores pasados dejará de ser el ancla que te hunde para convertirse, simplemente, en el suelo que pisas.</p>
-      </section>
-
-      <section class="reveal">
-        <h2>Este es tu <span class="h-highlight">equipo de supervivencia:</span></h2>
-        
-        <div class="equipment-item">
-          <h3>1. Visión de radar: El fin de la parálisis por análisis.</h3>
-          <p><span class="tag-label">El problema:</span> Te quedas bloqueado intentando "adivinar" qué significa su silencio o si ese comentario fue una señal de interés o un descarte. Como no tienes certeza, no actúas.</p>
-          <p><span class="tag-label">Lo que logras:</span> Un sistema de decodificación de subtexto. Aprenderás a "leer el código" de la interacción en tiempo real.</p>
-          <p><span class="tag-label">La victoria:</span> Sabrás exactamente cuándo avanzar y cuándo retirarte. Dejas de sobrepensar para empezar a ejecutar con datos reales.</p>
-        </div>
-
-        <div class="equipment-item">
-          <h3>2. Imperturbabilidad de alta presión: soberanía ante la incertidumbre.</h3>
-          <p><span class="tag-label">El problema:</span> Tu necesidad de control es tu mayor debilidad. Cuando ella te lanza una prueba o la situación se sale de tu guión, te justificas, te explicas o te bloqueas. Dejas de ser el hombre al que ella puede admirar para convertirte en un niño reactivo.</p>
-          <p><span class="tag-label">Lo que logras:</span> La capacidad de sostener la tensión sin romperte. Te mantienes como el "punto de referencia" estable, sin importar lo que ella haga o diga. Recuerda, sin tensión no hay atracción.</p>
-          <p><span class="tag-label">La victoria:</span> El fin de la reactividad. Ella sentirá tu solidez y, por primera vez, podrá relajarse en su energía femenina porque tú sostienes la estructura.</p>
-        </div>
-
-        <div class="equipment-item">
-          <h3>3. Comunicación penetrante: arquitectura de conexión real.</h3>
-          <p><span class="tag-label">El problema:</span> No sabes cómo pasar de la charla trivial a algo que genere deseo. Tus conversaciones son seguras, lógicas y mortalmente aburridas.</p>
-          <p><span class="tag-label">Lo que logras:</span> Un protocolo de arquitectura verbal para generar impacto emocional en minutos. Aprenderás a usar tu mundo interno para inyectar tensión y profundidad.</p>
-          <p><span class="tag-label">La victoria:</span> El fin de la friendzone. Tus palabras dejarán de ser ruido para convertirse en el portal a través del cual ella vive una experiencia emocional intensa.</p>
-        </div>
-      </section>
-
-      <section class="reveal">
-        <h2>7 Días. 7 Herramientas. <span class="h-highlight">7 intervenciones.</span></h2>
-        <p>Durante una semana completa, recibirás una herramienta diaria diseñada para ser aplicada de inmediato en la trinchera. No es teoría para archivar, es equipo para usar. Además, cada día nos sincronizaremos 15 minutos en vivo para calibrar tu ejecución y despejar el ruido antes de que salgas al campo.</p>
-        <div class="days-slider" id="daysSlider">
-          <div class="day-card">
-            <span class="day-tag">Día 1 y 2</span>
-            <h4>Instalación del radar.</h4>
-            <p>Decodificación de señales.</p>
-          </div>
-          <div class="day-card">
-            <span class="day-tag">Día 3 y 4</span>
-            <h4>Blindaje del sistema nervioso.</h4>
-            <p>Manejo de presión e incomodidad.</p>
-          </div>
-          <div class="day-card">
-            <span class="day-tag">Día 5 y 6</span>
-            <h4>Apertura de canales profundos.</h4>
-            <p>Comunicación penetrante.</p>
-          </div>
-          <div class="day-card">
-            <span class="day-tag">Día 7</span>
-            <h4>Integración total.</h4>
-            <p>El mapa de navegación.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="audit-section reveal">
-        <h2>Auditoría de cámara oculta: <span class="h-highlight">Ingeniería en vivo</span></h2>
-        <p>Los últimos 3 días de la inmersión (Días 5, 6 y 7) no solo aplicaremos las herramientas. Haremos algo que nadie más se atreve a mostrar:</p>
-        <ul class="audit-list">
-          <li>Analizaremos, fotograma a fotograma, una de mis interacciones más letales grabada en cámara oculta.</li>
-          <li>Verás la aplicación real de la visión de radar.</li>
-          <li>Observarás cómo sostengo la imperturbabilidad ante sus pruebas más duras.</li>
-          <li>Escucharás la comunicación penetrante en un entorno de alta presión.</li>
-        </ul>
-        <p>No es un video editado para que "se vea bien". Es ingeniería inversa de una conquista real para que entiendas la mecánica del mando en vivo.</p>
-      </section>
-
-      <section class="reveal">
-        <h2>La profundidad es irreversible. <span class="h-highlight">Tu pasividad no.</span></h2>
-        <p>El Deepfall ya te mostró las grietas de tu máscara. Quedarte ahí observando cómo te hundes no es una opción para un hombre de tu calibre. Si estás listo para dejar de ser el "buen tipo" que la superficie utiliza a su antojo, aquí es donde empieza tu inmersión. El fondo no perdona a los indecisos y la superficie ya no te pertenece. O te equipas ahora para recuperar tu centro, o aceptas que el peso de tu propia máscara termine por asfixiarte.</p>
-      </section>
-
-      <section class="reveal pact-section">
-        <h2>El <span class="h-highlight">pacto de trinchera</span></h2>
-        <p class="pact-context">He diseñado este modelo porque solo me interesa trabajar con hombres que ejecutan. El pacto de trinchera es una apuesta mutua por tu densidad:</p>
-
-        <div class="price-grid">
-          <div class="price-card">
-            <span class="price-card-title">Equípate hoy ($77)</span>
-            <strong>$77</strong>
-            <span class="price-card-label">PAGO INICIAL</span>
-            <p>Acceder a la tecnología, las herramientas y los 7 días de inmersión.</p>
-          </div>
-          <div class="price-card">
-            <span class="price-card-title">Paga solo al conseguir resultados ($77)</span>
-            <strong>$77</strong>
-            <span class="price-card-label">PAGO AL FINALIZAR</span>
-            <p>Solo cuando hayas terminado la inmersión y veas el impacto real en tus interacciones.</p>
-          </div>
-        </div>
-        
-        <div class="pact-divider"></div>
-        
-        <p class="pact-quote">
-          ¿Por qué lo hago así? Mi sistema se basa en resultados, no en promesas. Si tú no ganas, yo no cobro completo. No quiero tu dinero si no te doy densidad. Así de simple.
-        </p>
-      </section>
-
-      <section class="urgency-section reveal">
-        <h2>Privilegio de <span class="h-highlight">despliegue rápido</span></h2>
-        <p>Si decides dejar de ser un corcho en el mar y te equipas en las primeras 24 horas tras abrirse el acceso, recibirás: <strong>Auditoría 1 A 1 (15 MIN)</strong>. Una sesión privada conmigo para analizar tu perfil específico, detectar tu mayor fuga de densidad y darte una orden de mando personalizada antes de salir al campo.</p>
-        
-        <div id="countdown">
-          <div class="timer-block"><span class="timer-val" id="t-days">00</span><span class="timer-label">Días</span></div>
-          <div class="timer-block"><span class="timer-val" id="t-hours">00</span><span class="timer-label">Hrs</span></div>
-          <div class="timer-block"><span class="timer-val" id="t-mins">00</span><span class="timer-label">Min</span></div>
-          <div class="timer-block"><span class="timer-val" id="t-secs">00</span><span class="timer-label">Seg</span></div>
-        </div>
-
-        <p style="margin-top: 25px; font-size: 14px; border-top: 1px solid #444; padding-top: 20px;"><strong>Aviso de despliegue:</strong> El acceso al "Pacto de la Trinchera" finaliza este sábado a las 19:00. Después de esa hora, el pacto se rompe: el sistema se cierra y el precio sube a $157 (pago único).</p>
-      </section>
-
-      <div class="btn-container reveal">
-        <p style="font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 25px;">La montaña no regala territorio. Se conquista.</p>
-        <a href="#" class="cta-button">ADQUIRIR EL KIT DE SUPERVIVENCIA</a>
-        <p style="font-size: 13px; margin-top: 15px; color: var(--secondary);">Acceso inmediato. Aprende a transitar en la oscuridad.</p>
-      </div>
-
-      <footer class="reveal">
-        <img src="bufon.jpeg" alt="Logo" class="final-logo">
-      </footer>
+<section class="seven-section reveal">
+  <div class="seven-grid-header">
+    <div class="seven-line">
+      <span>7</span>
+      <span class="gradual-word w1">Días.</span>
     </div>
+    <div class="seven-line">
+      <span>7</span>
+      <span class="gradual-word w2">Herramientas.</span>
+    </div>
+    <div class="seven-line">
+      <span>7</span>
+      <span class="gradual-word w3">intervenciones.</span>
+    </div>
+  </div>
 
-    <script>
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  <div class="seven-description">
+    <p>Durante una semana completa, recibirás una herramienta diaria diseñada para ser aplicada de inmediato en la trinchera. No es teoría para archivar, es equipo para usar. Además, cada día nos sincronizaremos 15 minutos en vivo para calibrar tu ejecución y despejar el ruido antes de que salgas al campo.</p>
+  </div>
 
-      // TIMER: VIERNES 17 ABRIL 2026, 19:00 ECT
-      const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
-      
-      function updateTimer() {
-        const now = new Date().getTime();
-        const dist = targetDate - now;
-        if (dist < 0) { document.getElementById('countdown').innerHTML = "<p>Pacto Finalizado</p>"; return; }
+  <div class="days-slider" id="daysSlider">
+    <div class="day-card">
+      <span class="day-tag">Día 1 y 2</span>
+      <h4>Instalación del radar.</h4>
+      <p>(Decodificación de señales).</p>
+    </div>
+    <div class="day-card">
+      <span class="day-tag">Día 3 y 4</span>
+      <h4>Blindaje del sistema nervioso.</h4>
+      <p>(Manejo de presión e incomodidad).</p>
+    </div>
+    <div class="day-card">
+      <span class="day-tag">Día 5 y 6</span>
+      <h4>Apertura de canales profundos.</h4>
+      <p>(Comunicación penetrante).</p>
+    </div>
+    <div class="day-card">
+      <span class="day-tag">Día 7</span>
+      <h4>Integración total.</h4>
+      <p>(El mapa de navegación).</p>
+    </div>
+  </div>
+</section>
 
-        document.getElementById('t-days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        document.getElementById('t-hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        document.getElementById('t-mins').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        document.getElementById('t-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
-      }
-      setInterval(updateTimer, 1000); updateTimer();
+<script>
+  /* Lógica de scroll para el slider (para que funcione el arrastre con ratón) */
+  const slider = document.getElementById('daysSlider');
+  let isDown = false; let startX; let scrollLeft;
 
-      const slider = document.getElementById('daysSlider');
-      let isDown = false; let startX; let scrollLeft;
-      slider.addEventListener('mousedown', (e) => { isDown = true; slider.style.scrollSnapType = 'none'; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-      slider.addEventListener('mouseleave', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
-      slider.addEventListener('mouseup', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
-      slider.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 2; });
-    </script>
-</body>
-</html>
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.style.scrollSnapType = 'none';
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener('mouseleave', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
+  slider.addEventListener('mouseup', () => { isDown = false; slider.style.scrollSnapType = 'x mandatory'; });
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+</script>
