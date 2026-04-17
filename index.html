@@ -14,8 +14,8 @@
         --card-bg: #f8f8fa;
         --live-red: #ff3b30;
         --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        --gap: 80px;      /* Simetría entre secciones */
-        --title-gap: 35px; /* Simetría interna entre titular y cuerpo */
+        --gap: 80px;      /* Simetría matemática entre secciones */
+        --title-gap: 35px; /* Simetría interna titular-cuerpo */
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,6 +72,8 @@
       .highlight-promise { color: var(--primary); }
       .hero-copy { font-size: 18px; color: var(--secondary); line-height: 1.7; max-width: 620px; }
       .hero-copy p { margin-bottom: 24px; }
+      
+      /* AJUSTE: Espacio simétrico antes del cierre del Hero */
       .hero-footer-paragraph { margin-top: var(--gap); }
 
       /* --- 2. DIAGNÓSTICO --- */
@@ -80,8 +82,8 @@
       .strike-out { position: relative; display: inline-block; }
       .strike-out::after { content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 2px; background-color: var(--primary); transform: translateY(-50%) rotate(-5deg); }
       
+      /* AJUSTE: Espacio simétrico antes de "Estás cagándola..." */
       .list-header { font-weight: 700; color: var(--primary); margin-top: var(--gap); margin-bottom: var(--title-gap); display: block; font-size: 18px; }
-      
       .error-list { list-style: none; margin: 30px 0; }
       .error-list li { display: flex; gap: 15px; margin-bottom: 25px; font-size: 17px; align-items: flex-start; }
       .icon-x { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%; position: relative; margin-top: 2px; }
@@ -89,9 +91,12 @@
       .icon-x::before { transform: translate(-50%, -50%) rotate(45deg); }
       .icon-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
       
+      /* AJUSTE: Espacio simétrico antes de "Tu problema..." */
       .volatility-intro { margin-top: var(--gap); display: block; margin-bottom: var(--title-gap); }
       .problem-cards-container { display: flex; flex-direction: column; gap: 12px; margin: 40px 0; align-items: flex-start; }
       .problem-card { background: var(--primary); padding: 18px 25px; border-radius: 14px; color: #f0f0f0; font-size: 16px; width: fit-content; max-width: 100%; border: 1px solid #444; }
+      
+      /* AJUSTE: Espacio simétrico antes de "La Deepmersion soluciona..." */
       .solution-paragraph { margin-top: var(--gap); }
 
       /* --- 3. EQUIPO DE SUPERVIVENCIA --- */
@@ -100,15 +105,23 @@
       .base-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px; }
       .problem-label { color: var(--primary); }
       .disruptive-label { background: var(--primary); color: var(--white); padding: 4px 10px; border-radius: 4px; margin-left: -2px; }
-      .equipment-item p { font-size: 17px; margin-bottom: 25px; }
 
-      /* --- 4. 7 DÍAS SLIDER --- */
+      /* --- 4. 7 DÍAS SLIDER (CON BUCLE DE ANIMACIÓN) --- */
       .seven-grid-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: var(--gap); }
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
-      .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); transition: all 0.9s var(--ease); }
-      .active .gradual-word.w1 { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
-      .active .gradual-word.w2 { opacity: 1; transform: translateX(0); transition-delay: 0.7s; }
-      .active .gradual-word.w3 { opacity: 1; transform: translateX(0); transition-delay: 1.2s; }
+      
+      .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); }
+      
+      @keyframes gradualLoop {
+        0%, 10% { opacity: 0; transform: translateX(20px); }
+        20%, 80% { opacity: 1; transform: translateX(0); }
+        90%, 100% { opacity: 0; transform: translateX(20px); }
+      }
+
+      .active .gradual-word { animation: gradualLoop 5s infinite; }
+      .active .gradual-word.w1 { animation-delay: 0.2s; }
+      .active .gradual-word.w2 { animation-delay: 0.7s; }
+      .active .gradual-word.w3 { animation-delay: 1.2s; }
       
       .slider-hint { font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; display: block; opacity: 0.7; font-weight: 700; }
       .slider { display: flex; gap: 20px; overflow-x: auto; padding: 10px 0 30px 0; scrollbar-width: none; cursor: grab; }
@@ -127,23 +140,14 @@
       /* --- 6. ÚLTIMATUM --- */
       .final-subtitle { font-size: 26px; font-weight: 700; color: var(--secondary); margin-bottom: var(--title-gap); letter-spacing: -0.02em; }
 
-      /* --- 7. PACTO DE TRINCHERA --- */
+      /* --- 7. PACTO DE TRINCHERA (SIMÉTRICO) --- */
       .pact-section { padding: 60px 40px; border-radius: 32px; border: 1px solid #f0f0f0; text-align: center; }
       .pact-section h2 { margin-bottom: var(--title-gap); }
       .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-      
       .price-card { 
-        background: var(--card-bg); 
-        padding: 50px 20px; 
-        border-radius: 24px; 
-        border: 1px solid #f2f2f4; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        justify-content: center; 
-        min-height: 220px;
+        background: var(--card-bg); padding: 50px 20px; border-radius: 24px; border: 1px solid #f2f2f4; 
+        display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;
       }
-      
       .price-label { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 18px; text-transform: uppercase; color: var(--secondary); }
       .price-amount { font-size: 42px; font-weight: 500; color: var(--primary); line-height: 1; margin: 0 0 18px 0; letter-spacing: -0.03em; }
       .price-footer { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; color: var(--secondary); }
@@ -154,7 +158,6 @@
       .urgency-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--secondary); margin-bottom: 15px; display: block; }
       .urgency-description { color: #aaaaaa; font-size: 17px; line-height: 1.7; margin-bottom: 45px; }
       .urgency-description strong { color: var(--white); font-weight: 700; } 
-      
       .timer-display { display: flex; gap: 25px; margin-top: 20px; }
       .timer-val { font-size: 42px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--white); }
 
@@ -176,7 +179,6 @@
         
         <header class="reveal" id="hero-trigger">
             <img src="bufon.jpeg" alt="Logo Hero" class="header-logo">
-            
             <span class="product-label">Deepmersion</span>
             <h1>7 DÍAS <span class="highlight-promise">PARA DEJAR DE SER UN TÍTERE EN LA SUPERFICIE</span> Y RECUPERAR TU DENSIDAD.</h1>
             <div class="hero-copy">
@@ -331,7 +333,6 @@
             <p style="font-size: 20px; font-weight: 700; color: var(--secondary); margin-bottom: 35px;">La montaña no regala territorio. <span class="h-highlight">Se conquista.</span></p>
             <div style="margin-bottom: 25px;"><a href="#" class="cta-button">Realizar inmersión</a></div>
             <p style="font-size: 13px; color: var(--secondary); margin-bottom: 60px;">Acceso inmediato. Aprende a transitar en la oscuridad.</p>
-            
             <img src="deepmersion.jpeg" alt="Sello Final Deepmersion" class="final-signature-logo">
         </section>
 
@@ -346,7 +347,6 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // TIMER PARA ECUADOR (UTC-5)
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
