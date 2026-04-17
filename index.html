@@ -42,17 +42,10 @@
       /* --- TACHADO DINÁMICO EN BUCLE --- */
       .strike-out { position: relative; display: inline-block; color: inherit; }
       .strike-out::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        height: 2px;
-        background-color: var(--primary);
-        transform: translateY(-50%) rotate(-5deg);
-        width: 0;
-        animation: strikeLoop 3s infinite ease-in-out;
+        content: ""; position: absolute; left: 0; top: 50%; height: 2px;
+        background-color: var(--primary); transform: translateY(-50%) rotate(-5deg);
+        width: 0; animation: strikeLoop 3s infinite ease-in-out;
       }
-
       @keyframes strikeLoop {
         0% { width: 0; opacity: 0; }
         10% { opacity: 1; }
@@ -62,8 +55,7 @@
 
       /* --- INDICADOR EN DIRECTO (BLINK) --- */
       .live-tag {
-        display: inline-flex;
-        align-items: center; gap: 8px;
+        display: inline-flex; align-items: center; gap: 8px;
         font-size: 11px; font-weight: 800; text-transform: uppercase;
         letter-spacing: 0.15em; color: var(--live-red); margin-bottom: 20px;
       }
@@ -96,7 +88,6 @@
       .icon-x::before, .icon-x::after { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--primary); top: 50%; left: 50%; }
       .icon-x::before { transform: translate(-50%, -50%) rotate(45deg); }
       .icon-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
-      
       .volatility-intro { margin-top: var(--gap); display: block; margin-bottom: var(--title-gap); }
       .problem-cards-container { display: flex; flex-direction: column; gap: 12px; margin: 40px 0; align-items: flex-start; }
       .problem-card { background: var(--primary); padding: 18px 25px; border-radius: 14px; color: #f0f0f0; font-size: 16px; width: fit-content; max-width: 100%; border: 1px solid #444; }
@@ -108,13 +99,12 @@
       .base-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
       .problem-label { color: var(--primary); margin-bottom: 12px; }
       .disruptive-label { 
-        background: var(--primary); color: var(--white); 
-        padding: 4px 10px; border-radius: 4px; margin-left: -2px; 
-        margin-top: 35px; margin-bottom: 20px;
+        background: var(--primary); color: var(--white); padding: 4px 10px; border-radius: 4px; 
+        margin-left: -2px; margin-top: 35px; margin-bottom: 20px;
       }
       .equipment-item p { font-size: 17px; }
 
-      /* --- 4. 7 DÍAS SLIDER (MARQUESINA CONSTANTE) --- */
+      /* --- 4. 7 DÍAS SLIDER --- */
       .seven-grid-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: var(--gap); }
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
       .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); }
@@ -127,7 +117,6 @@
       .active .gradual-word.w1 { animation-delay: 0.2s; }
       .active .gradual-word.w2 { animation-delay: 0.7s; }
       .active .gradual-word.w3 { animation-delay: 1.2s; }
-      
       .slider-hint { font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; display: block; opacity: 0.7; font-weight: 700; }
       .marquee-viewport { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 20px 0; }
       .marquee-track { display: flex; gap: 20px; width: max-content; animation: scrollMarquee 35s linear infinite; }
@@ -150,7 +139,7 @@
       /* --- 6. ÚLTIMATUM --- */
       .final-subtitle { font-size: 26px; font-weight: 700; color: var(--secondary); margin-bottom: var(--title-gap); letter-spacing: -0.02em; }
 
-      /* --- 7. PACTO DE TRINCHERA (TARJETA FLOTANTE) --- */
+      /* --- 7. PACTO DE TRINCHERA --- */
       .pact-section { padding: 60px 40px; border-radius: 32px; border: 1px solid #f0f0f0; text-align: center; }
       .pact-section h2 { margin-bottom: var(--title-gap); }
       .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; perspective: 1000px; }
@@ -161,23 +150,32 @@
       .price-amount { font-size: 42px; font-weight: 500; color: var(--primary); line-height: 1; margin: 0 0 18px 0; letter-spacing: -0.03em; }
       .price-footer { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; color: var(--secondary); }
 
-      /* --- 8. URGENCIA TIMER --- */
+      /* --- 8. URGENCIA TIMER (RECALIBRADO PARA MÓVIL) --- */
       .urgency-card { background: var(--primary); padding: 65px 50px; border-radius: 32px; color: var(--white); }
       .urgency-card h2 { margin-bottom: var(--title-gap); color: var(--white); font-size: 28px; font-weight: 700; }
       .urgency-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--secondary); margin-bottom: 15px; display: block; }
       .urgency-description { color: #aaaaaa; font-size: 17px; line-height: 1.7; margin-bottom: 45px; }
       .urgency-description strong { color: var(--white); font-weight: 700; } 
+      
       .timer-display { display: flex; gap: 25px; margin-top: 20px; }
-      .timer-val { font-size: 42px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--white); }
+      .timer-val { font-size: 42px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--white); line-height: 1; }
+      .timer-label { font-size: 10px; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-top: 10px; display: block; letter-spacing: 0.1em; }
 
       /* --- 10. CIERRE FINAL --- */
       .cta-button { display: inline-block; background-color: var(--primary); color: var(--white); text-decoration: none; padding: 18px 36px; border-radius: 14px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; }
       .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; margin-top: 20px; }
 
+      /* AJUSTES RESPONSIVOS CRÍTICOS */
       @media (max-width: 600px) {
         .price-grid { grid-template-columns: 1fr; }
         .cta-button { width: 100%; text-align: center; }
-        .urgency-card { padding: 45px 25px; }
+        .urgency-card { padding: 40px 25px; }
+        .urgency-card h2 { font-size: 24px; }
+        /* Ajuste de Timer para evitar cortes */
+        .timer-display { gap: 15px; justify-content: flex-start; }
+        .timer-val { font-size: 28px; }
+        .timer-label { font-size: 8px; }
+        .equipment-item { padding: 40px 25px; }
       }
     </style>
 </head>
@@ -186,7 +184,7 @@
     <div class="container">
         
         <header class="reveal" id="hero-trigger">
-            <img src="bufon.jpeg" alt="Logo Hero" class="header-logo">
+            <img src="bufon.jpeg" alt="Logo" class="header-logo">
             <span class="product-label">Deepmersion</span>
             <h1>7 DÍAS <span class="highlight-promise">PARA DEJAR DE SER UN TÍTERE EN LA SUPERFICIE</span> Y RECUPERAR TU DENSIDAD.</h1>
             <div class="hero-copy">
@@ -219,7 +217,6 @@
 
         <section class="reveal">
             <h2 class="tactical-header">Este es tu <span class="h-highlight">equipo de supervivencia:</span></h2>
-            
             <div class="equipment-item">
                 <h3>1. Visión de radar: El fin de la parálisis por análisis.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -229,7 +226,6 @@
                 <span class="base-label disruptive-label">La victoria:</span>
                 <p>Sabrás exactamente cuándo avanzar y cuándo retirarte. Dejas de sobrepensar para empezar a ejecutar con datos reales.</p>
             </div>
-
             <div class="equipment-item">
                 <h3>2. Imperturbabilidad de alta presión: soberanía ante la incertidumbre.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -239,7 +235,6 @@
                 <span class="base-label disruptive-label">La victoria:</span>
                 <p>El fin de la reactividad. Ella sentirá tu solidez y, por primera vez, podrá relajarse en su energía femenina porque tú sostienes la estructura.</p>
             </div>
-
             <div class="equipment-item">
                 <h3>3. Comunicación penetrante: arquitectura de conexión real.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -258,16 +253,15 @@
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w3">intervenciones.</span></div>
             </div>
             <p style="font-size: 18px; margin-bottom: 40px;">Durante una semana completa, recibirás una herramienta diaria diseñada para ser aplicada de inmediato en la trinchera. No es teoría para archivar, es equipo para usar. Además, cada día nos sincronizaremos 15 minutos en vivo para calibrar tu ejecución y despejar el ruido antes de que salgas al campo.</p>
-            
             <span class="slider-hint">desliza para ver todo</span>
             <div class="marquee-viewport">
                 <div class="marquee-track">
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
-                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión).</p></div>
                     <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
                     <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
-                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión).</p></div>
                     <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
                     <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
                 </div>
@@ -344,7 +338,7 @@
             <p style="font-size: 20px; font-weight: 700; color: var(--secondary); margin-bottom: 35px;">La montaña no regala territorio. <span class="h-highlight">Se conquista.</span></p>
             <div style="margin-bottom: 25px;"><a href="#" class="cta-button">Realizar inmersión</a></div>
             <p style="font-size: 13px; color: var(--secondary); margin-bottom: 60px;">Acceso inmediato. Aprende a transitar en la oscuridad.</p>
-            <img src="deepmersion.jpeg" alt="Sello Final Deepmersion" class="final-signature-logo">
+            <img src="deepmersion.jpeg" alt="Sello Final" class="final-signature-logo">
         </section>
 
     </div>
@@ -357,7 +351,6 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // TIMER PARA ECUADOR (UTC-5)
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
             const now = new Date().getTime();
