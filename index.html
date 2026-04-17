@@ -42,26 +42,17 @@
       /* --- INDICADOR EN DIRECTO (BLINK) --- */
       .live-tag {
         display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--live-red);
-        margin-bottom: 20px;
+        align-items: center; gap: 8px;
+        font-size: 11px; font-weight: 800; text-transform: uppercase;
+        letter-spacing: 0.15em; color: var(--live-red); margin-bottom: 20px;
       }
       .live-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--live-red);
-        border-radius: 50%;
-        animation: blink 1.2s infinite ease-in-out;
+        width: 8px; height: 8px; background-color: var(--live-red);
+        border-radius: 50%; animation: blink 1.2s infinite ease-in-out;
       }
       @keyframes blink {
-        0% { opacity: 1; transform: scale(1); }
+        0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.4; transform: scale(0.9); }
-        100% { opacity: 1; transform: scale(1); }
       }
 
       /* --- 1. HERO --- */
@@ -79,7 +70,6 @@
       .h-highlight { color: var(--primary); }
       .strike-out { position: relative; display: inline-block; }
       .strike-out::after { content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 2px; background-color: var(--primary); transform: translateY(-50%) rotate(-5deg); }
-      
       .list-header { font-weight: 700; color: var(--primary); margin-top: var(--gap); margin-bottom: var(--title-gap); display: block; font-size: 18px; }
       .error-list { list-style: none; margin: 30px 0; }
       .error-list li { display: flex; gap: 15px; margin-bottom: 25px; font-size: 17px; align-items: flex-start; }
@@ -87,7 +77,6 @@
       .icon-x::before, .icon-x::after { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--primary); top: 50%; left: 50%; }
       .icon-x::before { transform: translate(-50%, -50%) rotate(45deg); }
       .icon-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
-      
       .volatility-intro { margin-top: var(--gap); display: block; margin-bottom: var(--title-gap); }
       .problem-cards-container { display: flex; flex-direction: column; gap: 12px; margin: 40px 0; align-items: flex-start; }
       .problem-card { background: var(--primary); padding: 18px 25px; border-radius: 14px; color: #f0f0f0; font-size: 16px; width: fit-content; max-width: 100%; border: 1px solid #444; }
@@ -100,10 +89,9 @@
       .problem-label { color: var(--primary); }
       .disruptive-label { background: var(--primary); color: var(--white); padding: 4px 10px; border-radius: 4px; margin-left: -2px; }
 
-      /* --- 4. 7 DÍAS SLIDER (BUCLE DINÁMICO) --- */
+      /* --- 4. 7 DÍAS SLIDER (BUCLE DE ANIMACIÓN) --- */
       .seven-grid-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: var(--gap); }
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
-      
       .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); }
       
       @keyframes gradualLoop {
@@ -111,19 +99,22 @@
         20%, 80% { opacity: 1; transform: translateX(0); }
         90%, 100% { opacity: 0; transform: translateX(20px); }
       }
-
       .active .gradual-word { animation: gradualLoop 5s infinite; }
       .active .gradual-word.w1 { animation-delay: 0.2s; }
       .active .gradual-word.w2 { animation-delay: 0.7s; }
       .active .gradual-word.w3 { animation-delay: 1.2s; }
       
       .slider-hint { font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; display: block; opacity: 0.7; font-weight: 700; }
-      .slider { 
-        display: flex; gap: 20px; overflow-x: auto; padding: 10px 0 30px 0; 
-        scrollbar-width: none; cursor: grab; scroll-behavior: smooth;
+      
+      /* Contenedor marquesina constante */
+      .marquee-viewport { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 20px 0; }
+      .marquee-track { display: flex; gap: 20px; width: max-content; animation: scrollMarquee 35s linear infinite; }
+      .marquee-viewport:hover .marquee-track { animation-play-state: paused; }
+      @keyframes scrollMarquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 10px)); }
       }
-      .slider::-webkit-scrollbar { display: none; }
-      .card { flex: 0 0 280px; background: var(--light-bg); padding: 30px; border-radius: 24px; border: 1px solid #f2f2f2; }
+      .card { width: 280px; background: var(--light-bg); padding: 30px; border-radius: 24px; border: 1px solid #f2f2f2; flex-shrink: 0; }
       .card h4 { font-size: 18px; margin: 15px 0 10px 0; color: var(--primary); }
 
       /* --- 5. AUDITORÍA --- */
@@ -137,7 +128,7 @@
       /* --- 6. ÚLTIMATUM --- */
       .final-subtitle { font-size: 26px; font-weight: 700; color: var(--secondary); margin-bottom: var(--title-gap); letter-spacing: -0.02em; }
 
-      /* --- 7. PACTO DE TRINCHERA --- */
+      /* --- 7. PACTO DE TRINCHERA (SIMETRÍA) --- */
       .pact-section { padding: 60px 40px; border-radius: 32px; border: 1px solid #f0f0f0; text-align: center; }
       .pact-section h2 { margin-bottom: var(--title-gap); }
       .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -160,11 +151,10 @@
 
       /* --- 10. CIERRE --- */
       .cta-button { display: inline-block; background-color: var(--primary); color: var(--white); text-decoration: none; padding: 18px 36px; border-radius: 14px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; }
-      .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; }
+      .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; margin-top: 20px; }
 
       @media (max-width: 600px) {
         .price-grid { grid-template-columns: 1fr; }
-        .card { flex: 0 0 85%; }
         .cta-button { width: 100%; text-align: center; }
         .urgency-card { padding: 45px 25px; }
       }
@@ -175,7 +165,7 @@
     <div class="container">
         
         <header class="reveal" id="hero-trigger">
-            <img src="bufon.jpeg" alt="Logo Hero" class="header-logo">
+            <img src="bufon.jpeg" alt="Logo" class="header-logo">
             <span class="product-label">Deepmersion</span>
             <h1>7 DÍAS <span class="highlight-promise">PARA DEJAR DE SER UN TÍTERE EN LA SUPERFICIE</span> Y RECUPERAR TU DENSIDAD.</h1>
             <div class="hero-copy">
@@ -244,25 +234,28 @@
             <div class="seven-grid-header">
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w1">Días.</span></div>
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w2">Herramientas.</span></div>
-                <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w3">Intervenciones.</span></div>
+                <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w3">intervenciones.</span></div>
             </div>
             <p style="font-size: 18px; margin-bottom: 40px;">Durante una semana completa, recibirás una herramienta diaria diseñada para ser aplicada de inmediato en la trinchera. No es teoría para archivar, es equipo para usar. Además, cada día nos sincronizaremos 15 minutos en vivo para calibrar tu ejecución y despejar el ruido antes de que salgas al campo.</p>
             
             <span class="slider-hint">desliza para ver todo</span>
-            <div class="slider" id="daysSlider">
-                <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
-                <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
-                <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
-                <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
+            <div class="marquee-viewport">
+                <div class="marquee-track">
+                    <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
+                    <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
+                    <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
+                    <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
+                    <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
+                    <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
+                </div>
             </div>
         </section>
 
         <section class="reveal" id="audit-trigger">
             <div class="audit-card">
-                <div class="live-tag">
-                  <span class="live-dot"></span>
-                  En directo
-                </div>
+                <div class="live-tag"><span class="live-dot"></span>En directo</div>
                 <h2>Auditoría de cámara oculta: <span class="h-highlight">Ingeniería en vivo</span></h2>
                 <p style="font-size: 18px; margin-bottom: 20px;">Los últimos 3 días de la inmersión (Días 5, 6 y 7) no solo aplicaremos las herramientas. Haremos algo que nadie más se atreve a mostrar:</p>
                 <p style="font-size: 18px; margin-bottom: 20px;">Analizaremos, fotograma a fotograma, una de mis interacciones más letales grabada en cámara oculta.</p>
@@ -271,7 +264,7 @@
                     <li>Observarás cómo sostengo la <strong>imperturbabilidad</strong> ante sus <strong>pruebas más duras</strong>.</li>
                     <li>Escucharás la <strong>comunicación penetrante</strong> en un entorno de <strong>alta presión</strong>.</li>
                 </ul>
-                <div style="font-size: 14px; color: #a0a0a0; font-style: italic;">No es un video editado para que "se vea bien". Es ingeniería inversa de una conquista real.</div>
+                <div style="font-size: 14px; color: #a0a0a0; font-style: italic;">No es un video editado para que "se vea bien". Es ingeniería inversa de una conquista real para que entiendas la mecánica del mando en vivo.</div>
             </div>
         </section>
 
@@ -330,7 +323,7 @@
             <p style="font-size: 20px; font-weight: 700; color: var(--secondary); margin-bottom: 35px;">La montaña no regala territorio. <span class="h-highlight">Se conquista.</span></p>
             <div style="margin-bottom: 25px;"><a href="#" class="cta-button">Realizar inmersión</a></div>
             <p style="font-size: 13px; color: var(--secondary); margin-bottom: 60px;">Acceso inmediato. Aprende a transitar en la oscuridad.</p>
-            <img src="deepmersion.jpeg" alt="Sello Final Deepmersion" class="final-signature-logo">
+            <img src="deepmersion.jpeg" alt="Sello" class="final-signature-logo">
         </section>
 
     </div>
@@ -341,18 +334,12 @@
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // TIMER PARA ECUADOR (UTC-5)
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff < 0) {
-                document.querySelector(".timer-display").innerHTML = "EXPIRADO";
-                return;
-            }
+            const diff = targetDate - new Date().getTime();
+            if (diff < 0) { document.querySelector(".timer-display").innerHTML = "EXPIRADO"; return; }
             document.getElementById("days").innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
             document.getElementById("minutes").innerText = Math.floor((diff % 36e5) / 6e4).toString().padStart(2, '0');
@@ -360,52 +347,6 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        // --- LÓGICA DEL SLIDER AUTOMATIZADO ---
-        const slider = document.getElementById('daysSlider');
-        let isDown = false, startX, scrollLeft;
-        let autoPlayInterval;
-
-        const startAutoPlay = () => {
-            autoPlayInterval = setInterval(() => {
-                const maxScroll = slider.scrollWidth - slider.offsetWidth;
-                if (slider.scrollLeft >= maxScroll - 5) {
-                    slider.scrollLeft = 0; // Reset al inicio
-                } else {
-                    slider.scrollLeft += 280 + 20; // Ancho tarjeta + gap
-                }
-            }, 3000); // Se mueve cada 3 segundos
-        };
-
-        const stopAutoPlay = () => clearInterval(autoPlayInterval);
-
-        // Control Manual (Drag)
-        slider.addEventListener('mousedown', (e) => { 
-            isDown = true; 
-            stopAutoPlay();
-            startX = e.pageX - slider.offsetLeft; 
-            scrollLeft = slider.scrollLeft; 
-        });
-        slider.addEventListener('mouseleave', () => { 
-            isDown = false;
-            startAutoPlay();
-        });
-        slider.addEventListener('mouseup', () => { 
-            isDown = false;
-            startAutoPlay();
-        });
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - slider.offsetLeft;
-            slider.scrollLeft = scrollLeft - (x - startX) * 2;
-        });
-
-        // Pausa al pasar el mouse
-        slider.addEventListener('mouseenter', stopAutoPlay);
-
-        // Iniciar
-        startAutoPlay();
 
         window.addEventListener('load', () => document.getElementById('hero-trigger').classList.add('active'));
     </script>
