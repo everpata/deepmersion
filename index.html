@@ -78,13 +78,22 @@
       h2.tactical-header { font-size: 26px; font-weight: 700; line-height: 1.3; color: var(--secondary); margin-bottom: var(--title-gap); }
       .h-highlight { color: var(--primary); }
       .list-header { font-weight: 700; color: var(--primary); margin-top: var(--gap); margin-bottom: var(--title-gap); display: block; font-size: 18px; }
+      
       .error-list { list-style: none; margin: 30px 0; }
       .error-list li { display: flex; gap: 15px; margin-bottom: 25px; font-size: 17px; align-items: flex-start; }
       .icon-x { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%; position: relative; margin-top: 2px; }
       .icon-x::before, .icon-x::after { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--primary); top: 50%; left: 50%; }
       .icon-x::before { transform: translate(-50%, -50%) rotate(45deg); }
       .icon-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
-      .volatility-intro { margin-top: var(--gap); display: block; margin-bottom: var(--title-gap); }
+      
+      /* AJUSTE: Proximidad simétrica con las viñetas (25px) */
+      .volatility-intro { 
+        margin-top: 25px; 
+        margin-bottom: 25px; 
+        display: block; 
+        font-size: 18px;
+        color: var(--secondary);
+      }
       .solution-paragraph { margin-top: var(--gap); }
 
       /* --- 3. EQUIPO DE SUPERVIVENCIA --- */
@@ -103,7 +112,6 @@
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
       
       .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); animation: gradualLoop 5s infinite; }
-      
       @keyframes gradualLoop {
         0%, 10% { opacity: 0; transform: translateX(20px); }
         20%, 80% { opacity: 1; transform: translateX(0); }
@@ -113,7 +121,6 @@
       .gradual-word.w2 { animation-delay: 0.7s; }
       .gradual-word.w3 { animation-delay: 1.2s; }
       
-      .slider-hint { font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; display: block; opacity: 0.7; font-weight: 700; }
       .marquee-viewport { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 20px 0; }
       .marquee-track { display: flex; gap: 20px; width: max-content; animation: scrollMarquee 35s linear infinite; }
       .marquee-viewport:hover .marquee-track { animation-play-state: paused; }
@@ -166,7 +173,7 @@
       }
       .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; margin-top: 20px; }
 
-      /* AJUSTES RESPONSIVOS */
+      /* RESPONSIVO */
       @media (max-width: 600px) {
         body { padding: 0 32px; }
         .price-grid { grid-template-columns: 1fr; }
@@ -184,7 +191,7 @@
 
     <div class="container">
         
-        <header id="hero-trigger">
+        <header>
             <img src="bufon.jpeg" alt="Logo" class="header-logo">
             <span class="product-label">Deepmersion</span>
             <h1>7 DÍAS <span class="highlight-promise">PARA DEJAR DE SER UN TÍTERE EN LA SUPERFICIE</span> Y RECUPERAR TU DENSIDAD.</h1>
@@ -197,18 +204,23 @@
         <section>
             <h2 class="tactical-header">La Deepmersion no es un <span class="strike-out">curso de seducción</span>. <span class="h-highlight">Es una inmersión táctica de 7 días.</span></h2>
             <p style="font-size: 18px;">Está diseñada para dotarte del equipo de supervivencia que tu sistema nervioso necesita para dejar de ser reactivo y empezar a ser el punto de referencia de cada interacción.</p>
+            
             <span class="list-header">Estás cagándola en el amor porque:</span>
             <ul class="error-list">
                 <li><div class="icon-x"></div><span>Sigues intentando resolver tus heridas profundas con prácticas superficiales (sí, esto incluye usar la ley del hielo y demás).</span></li>
                 <li><div class="icon-x"></div><span>Crees que una vez sepas "qué decirle" el dilema se resuelve, sin haber trabajado en quién eres tú para decírselo.</span></li>
             </ul>
+            
             <p style="font-size: 18px; margin-bottom: 24px;">Para un hombre de mente lógica como tú, eso solo añade más carga a una mochila que ya pesa demasiado.</p>
-            <span class="volatility-intro" style="font-size: 18px;">Tu problema no es la falta de información. <strong>Es la volatilidad.</strong></span>
+            
+            <span class="volatility-intro">Tu problema no es la falta de información. <strong>Es la volatilidad.</strong></span>
+
             <ul class="error-list">
                 <li><div class="icon-x"></div><span>Tu estado emocional depende de ella.</span></li>
                 <li><div class="icon-x"></div><span>Tu comunicación es una entrevista de trabajo.</span></li>
                 <li><div class="icon-x"></div><span>Y tu mente colapsa porque intentas controlarlo todo para evitar el rechazo.</span></li>
             </ul>
+
             <p style="font-size: 18px;" class="solution-paragraph">La Deepmersion <strong>soluciona los 3 fallos sistémicos que destrozan tu atracción en el presente y sentencian tu futuro con ellas.</strong> Solo cuando instales este equipo, el peso de tus errores pasados dejará de ser el ancla que te hunde para convertirse, simplemente, en el suelo que pisas.</p>
         </section>
 
@@ -243,14 +255,14 @@
             </div>
         </section>
 
-        <section id="trigger-7">
+        <section>
             <div class="seven-grid-header">
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w1">Días.</span></div>
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w2">Herramientas.</span></div>
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w3">intervenciones.</span></div>
             </div>
             <p style="font-size: 18px; margin-bottom: 40px;">Durante una semana completa, recibirás una herramienta diaria diseñada para ser aplicada de inmediato en la trinchera. No es teoría para archivar, es equipo para usar. Además, cada día nos sincronizaremos 15 minutos en vivo para calibrar tu ejecución y despejar el ruido antes de que salgas al campo.</p>
-            <span class="slider-hint">desliza para ver todo</span>
+            
             <div class="marquee-viewport">
                 <div class="marquee-track">
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
@@ -265,7 +277,7 @@
             </div>
         </section>
 
-        <section id="audit-trigger">
+        <section>
             <div class="audit-card">
                 <div class="live-tag"><span class="live-dot"></span>En directo</div>
                 <h2>Auditoría de cámara oculta: <span class="h-highlight">Ingeniería en vivo</span></h2>
@@ -289,7 +301,7 @@
             </div>
         </section>
 
-        <section id="pact-trigger">
+        <section>
             <div class="pact-section">
                 <h2 style="color:var(--primary)">El pacto de trinchera</h2>
                 <p style="font-size: 16px; margin-bottom: 40px;">Mi sistema se basa en resultados, no en promesas. Solo cuando hayas terminado la inmersión y veas el impacto real en tus interacciones, completarás la inversión.</p>
@@ -308,7 +320,7 @@
             </div>
         </section>
 
-        <section id="timer-trigger">
+        <section>
             <div class="urgency-card">
                 <span class="urgency-label">Privilegio de despliegue rápido</span>
                 <h2>Solo por 24 hrs</h2>
@@ -326,7 +338,7 @@
             </div>
         </section>
 
-        <section id="notice-trigger">
+        <section>
             <span class="notice-label">Aviso de despliegue</span>
             <p style="font-size: 18px; line-height: 1.7;">El acceso al <strong>pacto de trinchera</strong> finaliza este sábado a las 19:00. Después de esa hora, el pacto se rompe: el sistema se cierra y el precio sube a $157 (pago único). <strong>La indecisión es el impuesto más caro de la superficie.</strong></p>
         </section>
@@ -343,11 +355,10 @@
     </div>
 
     <script>
-        // TIMER PARA ECUADOR (UTC-5)
+        // TIMER ECUADOR (UTC-5)
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
+            const diff = targetDate - new Date().getTime();
             if (diff < 0) { document.querySelector(".timer-display").innerHTML = "EXPIRADO"; return; }
             document.getElementById("days").innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
