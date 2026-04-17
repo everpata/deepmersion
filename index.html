@@ -23,7 +23,7 @@
       body { 
         margin: 0; background: var(--white); 
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif; 
-        padding: 0 32px; /* Margen base generoso */
+        padding: 0 32px; 
         -webkit-font-smoothing: antialiased;
         text-align: left;
         color: var(--secondary);
@@ -31,10 +31,6 @@
       }
 
       .container { max-width: 700px; margin: 0 auto; }
-
-      /* --- ANIMACIONES REVEAL --- */
-      .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease); }
-      .reveal.active { opacity: 1; transform: translateY(0); }
 
       section { margin-bottom: var(--gap); }
       strong { color: var(--primary); font-weight: 700; }
@@ -102,19 +98,21 @@
       }
       .equipment-item p { font-size: 17px; }
 
-      /* --- 4. 7 DÍAS SLIDER --- */
+      /* --- 4. 7 DÍAS SLIDER (MARQUESINA CONSTANTE) --- */
       .seven-grid-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: var(--gap); }
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
-      .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); }
+      
+      .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); animation: gradualLoop 5s infinite; }
+      
       @keyframes gradualLoop {
         0%, 10% { opacity: 0; transform: translateX(20px); }
         20%, 80% { opacity: 1; transform: translateX(0); }
         90%, 100% { opacity: 0; transform: translateX(20px); }
       }
-      .active .gradual-word { animation: gradualLoop 5s infinite; }
-      .active .gradual-word.w1 { animation-delay: 0.2s; }
-      .active .gradual-word.w2 { animation-delay: 0.7s; }
-      .active .gradual-word.w3 { animation-delay: 1.2s; }
+      .gradual-word.w1 { animation-delay: 0.2s; }
+      .gradual-word.w2 { animation-delay: 0.7s; }
+      .gradual-word.w3 { animation-delay: 1.2s; }
+      
       .slider-hint { font-size: 11px; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; display: block; opacity: 0.7; font-weight: 700; }
       .marquee-viewport { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 20px 0; }
       .marquee-track { display: flex; gap: 20px; width: max-content; animation: scrollMarquee 35s linear infinite; }
@@ -160,12 +158,17 @@
       .timer-label { font-size: 10px; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-top: 10px; display: block; letter-spacing: 0.1em; }
 
       /* --- 10. CIERRE FINAL --- */
-      .cta-button { display: inline-block; background-color: var(--primary); color: var(--white); text-decoration: none; padding: 18px 36px; border-radius: 14px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; }
+      .cta-button { 
+        display: inline-block; background-color: var(--primary); color: var(--white); 
+        text-decoration: none; padding: 18px 36px; border-radius: 14px; 
+        font-size: 15px; font-weight: 700; text-transform: uppercase; 
+        letter-spacing: 0.05em; transition: transform 0.2s ease; 
+      }
       .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; margin-top: 20px; }
 
-      /* AJUSTES RESPONSIVOS CRÍTICOS */
+      /* AJUSTES RESPONSIVOS */
       @media (max-width: 600px) {
-        body { padding: 0 32px; } /* Más espacio a los lados solicitado */
+        body { padding: 0 32px; }
         .price-grid { grid-template-columns: 1fr; }
         .cta-button { width: 100%; text-align: center; }
         .urgency-card { padding: 40px 25px; }
@@ -181,7 +184,7 @@
 
     <div class="container">
         
-        <header class="reveal" id="hero-trigger">
+        <header id="hero-trigger">
             <img src="bufon.jpeg" alt="Logo" class="header-logo">
             <span class="product-label">Deepmersion</span>
             <h1>7 DÍAS <span class="highlight-promise">PARA DEJAR DE SER UN TÍTERE EN LA SUPERFICIE</span> Y RECUPERAR TU DENSIDAD.</h1>
@@ -191,30 +194,25 @@
             </div>
         </header>
 
-        <section class="reveal">
+        <section>
             <h2 class="tactical-header">La Deepmersion no es un <span class="strike-out">curso de seducción</span>. <span class="h-highlight">Es una inmersión táctica de 7 días.</span></h2>
             <p style="font-size: 18px;">Está diseñada para dotarte del equipo de supervivencia que tu sistema nervioso necesita para dejar de ser reactivo y empezar a ser el punto de referencia de cada interacción.</p>
-            
             <span class="list-header">Estás cagándola en el amor porque:</span>
             <ul class="error-list">
                 <li><div class="icon-x"></div><span>Sigues intentando resolver tus heridas profundas con prácticas superficiales (sí, esto incluye usar la ley del hielo y demás).</span></li>
                 <li><div class="icon-x"></div><span>Crees que una vez sepas "qué decirle" el dilema se resuelve, sin haber trabajado en quién eres tú para decírselo.</span></li>
             </ul>
-            
             <p style="font-size: 18px; margin-bottom: 24px;">Para un hombre de mente lógica como tú, eso solo añade más carga a una mochila que ya pesa demasiado.</p>
-            
             <span class="volatility-intro" style="font-size: 18px;">Tu problema no es la falta de información. <strong>Es la volatilidad.</strong></span>
-
             <ul class="error-list">
                 <li><div class="icon-x"></div><span>Tu estado emocional depende de ella.</span></li>
                 <li><div class="icon-x"></div><span>Tu comunicación es una entrevista de trabajo.</span></li>
                 <li><div class="icon-x"></div><span>Y tu mente colapsa porque intentas controlarlo todo para evitar el rechazo.</span></li>
             </ul>
-
             <p style="font-size: 18px;" class="solution-paragraph">La Deepmersion <strong>soluciona los 3 fallos sistémicos que destrozan tu atracción en el presente y sentencian tu futuro con ellas.</strong> Solo cuando instales este equipo, el peso de tus errores pasados dejará de ser el ancla que te hunde para convertirse, simplemente, en el suelo que pisas.</p>
         </section>
 
-        <section class="reveal">
+        <section>
             <h2 class="tactical-header">Este es tu <span class="h-highlight">equipo de supervivencia:</span></h2>
             <div class="equipment-item">
                 <h3>1. Visión de radar: El fin de la parálisis por análisis.</h3>
@@ -245,7 +243,7 @@
             </div>
         </section>
 
-        <section class="reveal" id="trigger-7">
+        <section id="trigger-7">
             <div class="seven-grid-header">
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w1">Días.</span></div>
                 <div class="seven-line"><span class="seven-num">7</span><span class="gradual-word w2">Herramientas.</span></div>
@@ -260,14 +258,14 @@
                     <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
                     <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
-                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
                     <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
                     <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
                 </div>
             </div>
         </section>
 
-        <section class="reveal" id="audit-trigger">
+        <section id="audit-trigger">
             <div class="audit-card">
                 <div class="live-tag"><span class="live-dot"></span>En directo</div>
                 <h2>Auditoría de cámara oculta: <span class="h-highlight">Ingeniería en vivo</span></h2>
@@ -278,11 +276,11 @@
                     <li>Observarás cómo sostengo la <strong>imperturbabilidad</strong> ante sus <strong>pruebas más duras</strong>.</li>
                     <li>Escucharás la <strong>comunicación penetrante</strong> en un entorno de <strong>alta presión</strong>.</li>
                 </ul>
-                <div style="font-size: 14px; color: #a0a0a0; font-style: italic;">No es un video editado para que "se vea bien". Es ingeniería inversa de una conquista real.</div>
+                <div style="font-size: 14px; color: #a0a0a0; font-style: italic;">No es un video editado para que "se vea bien". Es ingeniería inversa de una conquista real para que entiendas la mecánica del mando en vivo.</div>
             </div>
         </section>
 
-        <section class="reveal">
+        <section>
             <h2 class="final-subtitle">La profundidad es irreversible. <span class="h-highlight">Tu pasividad no.</span></h2>
             <div style="font-size: 18px; line-height: 1.7;">
                 <p style="margin-bottom: 24px;">El Deepfall ya te mostró las grietas de tu máscara. Quedarte ahí observando cómo te hundes no es una opción para un <strong>hombre de tu calibre</strong>.</p>
@@ -291,7 +289,7 @@
             </div>
         </section>
 
-        <section class="reveal" id="pact-trigger">
+        <section id="pact-trigger">
             <div class="pact-section">
                 <h2 style="color:var(--primary)">El pacto de trinchera</h2>
                 <p style="font-size: 16px; margin-bottom: 40px;">Mi sistema se basa en resultados, no en promesas. Solo cuando hayas terminado la inmersión y veas el impacto real en tus interacciones, completarás la inversión.</p>
@@ -310,7 +308,7 @@
             </div>
         </section>
 
-        <section class="reveal" id="timer-trigger">
+        <section id="timer-trigger">
             <div class="urgency-card">
                 <span class="urgency-label">Privilegio de despliegue rápido</span>
                 <h2>Solo por 24 hrs</h2>
@@ -328,14 +326,16 @@
             </div>
         </section>
 
-        <section class="reveal" id="notice-trigger">
+        <section id="notice-trigger">
             <span class="notice-label">Aviso de despliegue</span>
             <p style="font-size: 18px; line-height: 1.7;">El acceso al <strong>pacto de trinchera</strong> finaliza este sábado a las 19:00. Después de esa hora, el pacto se rompe: el sistema se cierra y el precio sube a $157 (pago único). <strong>La indecisión es el impuesto más caro de la superficie.</strong></p>
         </section>
 
-        <section class="reveal active">
+        <section>
             <p style="font-size: 20px; font-weight: 700; color: var(--secondary); margin-bottom: 35px;">La montaña no regala territorio. <span class="h-highlight">Se conquista.</span></p>
-            <div style="margin-bottom: 25px;"><a href="#" class="cta-button">Realizar inmersión</a></div>
+            <div style="margin-bottom: 25px;">
+              <a href="https://www.paypal.com/ncp/payment/UBUJ5XFB59TJY" target="_blank" rel="noopener" class="cta-button">Realizar inmersión</a>
+            </div>
             <p style="font-size: 13px; color: var(--secondary); margin-bottom: 60px;">Acceso inmediato. Aprende a transitar en la oscuridad.</p>
             <img src="deepmersion.jpeg" alt="Sello Final" class="final-signature-logo">
         </section>
@@ -343,16 +343,11 @@
     </div>
 
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
+        // TIMER PARA ECUADOR (UTC-5)
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
-            const diff = targetDate - new Date().getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
             if (diff < 0) { document.querySelector(".timer-display").innerHTML = "EXPIRADO"; return; }
             document.getElementById("days").innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
@@ -361,8 +356,6 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        window.addEventListener('load', () => document.getElementById('hero-trigger').classList.add('active'));
     </script>
 </body>
 </html>
