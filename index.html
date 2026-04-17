@@ -14,8 +14,8 @@
         --card-bg: #f8f8fa;
         --live-red: #ff3b30;
         --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        --gap: 80px;      
-        --title-gap: 35px; 
+        --gap: 80px;      /* Simetría entre secciones */
+        --title-gap: 35px; /* Simetría interna titular-cuerpo */
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -89,8 +89,6 @@
       .icon-x::before { transform: translate(-50%, -50%) rotate(45deg); }
       .icon-x::after { transform: translate(-50%, -50%) rotate(-45deg); }
       .volatility-intro { margin-top: var(--gap); display: block; margin-bottom: var(--title-gap); }
-      .problem-cards-container { display: flex; flex-direction: column; gap: 12px; margin: 40px 0; align-items: flex-start; }
-      .problem-card { background: var(--primary); padding: 18px 25px; border-radius: 14px; color: #f0f0f0; font-size: 16px; width: fit-content; max-width: 100%; border: 1px solid #444; }
       .solution-paragraph { margin-top: var(--gap); }
 
       /* --- 3. EQUIPO DE SUPERVIVENCIA --- */
@@ -99,12 +97,13 @@
       .base-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
       .problem-label { color: var(--primary); margin-bottom: 12px; }
       .disruptive-label { 
-        background: var(--primary); color: var(--white); padding: 4px 10px; border-radius: 4px; 
-        margin-left: -2px; margin-top: 35px; margin-bottom: 20px;
+        background: var(--primary); color: var(--white); 
+        padding: 4px 10px; border-radius: 4px; margin-left: -2px; 
+        margin-top: 35px; margin-bottom: 20px;
       }
       .equipment-item p { font-size: 17px; }
 
-      /* --- 4. 7 DÍAS SLIDER --- */
+      /* --- 4. 7 DÍAS SLIDER (MARQUESINA CONSTANTE) --- */
       .seven-grid-header { display: flex; flex-direction: column; gap: 10px; margin-bottom: var(--gap); }
       .seven-line { font-size: clamp(40px, 9vw, 64px); font-weight: 800; line-height: 1.1; display: flex; align-items: center; gap: 15px; color: var(--primary); letter-spacing: -0.04em; }
       .gradual-word { opacity: 0; transform: translateX(20px); color: var(--secondary); }
@@ -139,7 +138,7 @@
       /* --- 6. ÚLTIMATUM --- */
       .final-subtitle { font-size: 26px; font-weight: 700; color: var(--secondary); margin-bottom: var(--title-gap); letter-spacing: -0.02em; }
 
-      /* --- 7. PACTO DE TRINCHERA --- */
+      /* --- 7. PACTO DE TRINCHERA (TARJETA FLOTANTE) --- */
       .pact-section { padding: 60px 40px; border-radius: 32px; border: 1px solid #f0f0f0; text-align: center; }
       .pact-section h2 { margin-bottom: var(--title-gap); }
       .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; perspective: 1000px; }
@@ -150,13 +149,13 @@
       .price-amount { font-size: 42px; font-weight: 500; color: var(--primary); line-height: 1; margin: 0 0 18px 0; letter-spacing: -0.03em; }
       .price-footer { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; color: var(--secondary); }
 
-      /* --- 8. URGENCIA TIMER (RECALIBRADO PARA MÓVIL) --- */
+      /* --- 8. URGENCIA TIMER --- */
       .urgency-card { background: var(--primary); padding: 65px 50px; border-radius: 32px; color: var(--white); }
       .urgency-card h2 { margin-bottom: var(--title-gap); color: var(--white); font-size: 28px; font-weight: 700; }
       .urgency-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--secondary); margin-bottom: 15px; display: block; }
       .urgency-description { color: #aaaaaa; font-size: 17px; line-height: 1.7; margin-bottom: 45px; }
+      .urgency-description p { margin-bottom: 20px; }
       .urgency-description strong { color: var(--white); font-weight: 700; } 
-      
       .timer-display { display: flex; gap: 25px; margin-top: 20px; }
       .timer-val { font-size: 42px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--white); line-height: 1; }
       .timer-label { font-size: 10px; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-top: 10px; display: block; letter-spacing: 0.1em; }
@@ -165,14 +164,11 @@
       .cta-button { display: inline-block; background-color: var(--primary); color: var(--white); text-decoration: none; padding: 18px 36px; border-radius: 14px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease; }
       .final-signature-logo { width: 35px; height: auto; opacity: 0.8; filter: grayscale(1); border-radius: 6px; display: block; margin-top: 20px; }
 
-      /* AJUSTES RESPONSIVOS CRÍTICOS */
       @media (max-width: 600px) {
         .price-grid { grid-template-columns: 1fr; }
         .cta-button { width: 100%; text-align: center; }
-        .urgency-card { padding: 40px 25px; }
-        .urgency-card h2 { font-size: 24px; }
-        /* Ajuste de Timer para evitar cortes */
-        .timer-display { gap: 15px; justify-content: flex-start; }
+        .urgency-card { padding: 45px 25px; }
+        .timer-display { gap: 15px; }
         .timer-val { font-size: 28px; }
         .timer-label { font-size: 8px; }
         .equipment-item { padding: 40px 25px; }
@@ -204,19 +200,21 @@
             </ul>
             
             <p style="font-size: 18px; margin-bottom: 24px;">Para un hombre de mente lógica como tú, eso solo añade más carga a una mochila que ya pesa demasiado.</p>
-            <p style="font-size: 18px;" class="volatility-intro">Tu problema no es la falta de información. <strong>Es la volatilidad.</strong></p>
+            
+            <span class="volatility-intro" style="font-size: 18px;">Tu problema no es la falta de información. <strong>Es la volatilidad.</strong></span>
 
-            <div class="problem-cards-container">
-                <div class="problem-card">Tu estado emocional depende de ella.</div>
-                <div class="problem-card">Tu comunicación es una entrevista de trabajo.</div>
-                <div class="problem-card">Y tu mente colapsa porque intentas controlarlo todo para evitar el rechazo.</div>
-            </div>
+            <ul class="error-list">
+                <li><div class="icon-x"></div><span>Tu estado emocional depende de ella.</span></li>
+                <li><div class="icon-x"></div><span>Tu comunicación es una entrevista de trabajo.</span></li>
+                <li><div class="icon-x"></div><span>Y tu mente colapsa porque intentas controlarlo todo para evitar el rechazo.</span></li>
+            </ul>
 
             <p style="font-size: 18px;" class="solution-paragraph">La Deepmersion <strong>soluciona los 3 fallos sistémicos que destrozan tu atracción en el presente y sentencian tu futuro con ellas.</strong> Solo cuando instales este equipo, el peso de tus errores pasados dejará de ser el ancla que te hunde para convertirse, simplemente, en el suelo que pisas.</p>
         </section>
 
         <section class="reveal">
             <h2 class="tactical-header">Este es tu <span class="h-highlight">equipo de supervivencia:</span></h2>
+            
             <div class="equipment-item">
                 <h3>1. Visión de radar: El fin de la parálisis por análisis.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -226,6 +224,7 @@
                 <span class="base-label disruptive-label">La victoria:</span>
                 <p>Sabrás exactamente cuándo avanzar y cuándo retirarte. Dejas de sobrepensar para empezar a ejecutar con datos reales.</p>
             </div>
+
             <div class="equipment-item">
                 <h3>2. Imperturbabilidad de alta presión: soberanía ante la incertidumbre.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -235,6 +234,7 @@
                 <span class="base-label disruptive-label">La victoria:</span>
                 <p>El fin de la reactividad. Ella sentirá tu solidez y, por primera vez, podrá relajarse en su energía femenina porque tú sostienes la estructura.</p>
             </div>
+
             <div class="equipment-item">
                 <h3>3. Comunicación penetrante: arquitectura de conexión real.</h3>
                 <span class="base-label problem-label">El problema:</span>
@@ -257,7 +257,7 @@
             <div class="marquee-viewport">
                 <div class="marquee-track">
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
-                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión).</p></div>
+                    <div class="card"><span class="day-tag">Día 3 y 4</span><h4>Blindaje del sistema nervioso.</h4><p>(Manejo de presión e incomodidad).</p></div>
                     <div class="card"><span class="day-tag">Día 5 y 6</span><h4>Apertura de canales profundos.</h4><p>(Comunicación penetrante).</p></div>
                     <div class="card"><span class="day-tag">Día 7</span><h4>Integración total.</h4><p>(El mapa de navegación).</p></div>
                     <div class="card"><span class="day-tag">Día 1 y 2</span><h4>Instalación del radar.</h4><p>(Decodificación de señales).</p></div>
@@ -353,8 +353,7 @@
 
         const targetDate = new Date("2026-04-17T19:00:00-05:00").getTime();
         function updateTimer() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
+            const diff = targetDate - new Date().getTime();
             if (diff < 0) { document.querySelector(".timer-display").innerHTML = "EXPIRADO"; return; }
             document.getElementById("days").innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
             document.getElementById("hours").innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
