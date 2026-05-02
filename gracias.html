@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmersión Confirmada | Deepmersion</title>
+    <style>
+      :root {
+        --primary: #333333; 
+        --secondary: #878787; 
+        --white: #ffffff;
+        --card-bg: #f8f8fa;
+        --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body { 
+        margin: 0; background: var(--white); 
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; 
+        display: flex;
+        align-items: center; /* Mantiene la tarjeta al centro de la pantalla */
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        color: var(--secondary);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .thank-you-card {
+        max-width: 500px;
+        width: 100%;
+        text-align: left; /* Justificado a la izquierda */
+        background: var(--white);
+        padding: 60px 40px;
+        border-radius: 32px;
+        border: 1px solid #f0f0f0;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.8s var(--ease) forwards;
+      }
+
+      @keyframes fadeIn {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .logo-icon {
+        width: 45px;
+        height: auto;
+        margin-bottom: 40px;
+        margin-left: 0; /* Asegura que el logo no tenga márgenes automáticos */
+        display: block;
+        opacity: 0.9;
+        filter: grayscale(1);
+        border-radius: 8px;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: -0.03em;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
+      p {
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+      }
+
+      strong {
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .whatsapp-button {
+        display: inline-block;
+        background-color: var(--primary);
+        color: var(--white);
+        text-decoration: none;
+        padding: 20px 40px;
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.3s var(--ease);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      }
+
+      .whatsapp-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        background-color: #000;
+      }
+
+      .footer-note {
+        margin-top: 40px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        opacity: 0.5;
+      }
+
+      @media (max-width: 480px) {
+        .thank-you-card { padding: 45px 32px; }
+        h1 { font-size: 24px; }
+        .whatsapp-button { width: 100%; text-align: center; } /* El botón se expande en móvil para mejor usabilidad */
+      }
+    </style>
+</head>
+<body>
+
+    <div class="thank-you-card">
+        <img src="deepmersion.jpeg" alt="Logo" class="logo-icon">
+        
+        <h1>Inmersión<br>Confirmada</h1>
+        
+        <p>Has cruzado la superficie. Ahora, el trabajo real empieza en la trinchera. Únete al grupo de WhatsApp para recibir las <strong>herramientas diarias</strong> y las <strong>coordenadas</strong> de las sesiones en directo.</p>
+
+        <a href="LINK_DE_TU_GRUPO_DE_WHATSAPP" class="whatsapp-button">
+            Entrar a la Trinchera
+        </a>
+
+        <p class="footer-note">Nos vemos en el fondo.</p>
+    </div>
+
+</body>
+</html>
